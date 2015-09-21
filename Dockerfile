@@ -1,8 +1,11 @@
-FROM java:8
+FROM ubuntu:14.04
 
 MAINTAINER Drew Heavner <veedubusc@gmail.com>
 
-ENV DEBIAN_FRONTEND noninteractive
+# Install java7
+RUN apt-get install -y software-properties-common && add-apt-repository -y ppa:webupd8team/java && apt-get update
+RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+RUN apt-get install -y oracle-java8-installer
 
 # Install dependencies
 RUN dpkg --add-architecture i386 && \
@@ -24,3 +27,6 @@ ONBUILD RUN echo y | android update sdk --no-ui --force --all --filter tools,pla
 
 # Git to pull external repositories of Android app projects
 RUN apt-get install -y --no-install-recommends git
+
+RUN mkdir -p /opt/workspace
+WORKDIR /opt/workspace
