@@ -24,7 +24,3 @@ ONBUILD RUN echo y | android update sdk --no-ui --force --all --filter tools,pla
 
 # Git to pull external repositories of Android app projects
 RUN apt-get install -y --no-install-recommends git
-
-# Support Gradle
-ENV TERM dumb
-ENV JAVA_OPTS -Xms256m -Xmx1024m
