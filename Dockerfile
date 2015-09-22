@@ -31,7 +31,7 @@ RUN apt-get install -y --no-install-recommends git openssh-client
 
 # Mount the data volume and assume control of data and keys
 VOLUME ~/data/.ssh:/root/.ssh
-RUN /opt/tools/setup-ssh.sh
+#RUN /opt/tools/setup-ssh.sh
 
 # Cleaning
 RUN apt-get clean
