@@ -26,8 +26,6 @@ RUN chown root:root /opt/tools && chmod 777 /opt/tools && chmod 777 /opt/tools/a
 ENV PATH ${PATH}:/opt/tools
 RUN echo y | android update sdk --no-ui --force --all --filter tools,platform-tools,build-tools-23.0.1,android-23,extra-google-m2repository,extra-google-google_play_services,extra-android-support,extra-android-m2repository
 
-RUN which android
-
 # Git to pull external repositories of Android app projects
 RUN apt-get install -y --no-install-recommends git openssh-client
 
