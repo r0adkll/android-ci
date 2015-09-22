@@ -28,7 +28,11 @@ RUN ["/opt/tools/android-accept-licenses.sh", "android update sdk --no-ui --forc
 RUN which android
 
 # Git to pull external repositories of Android app projects
-RUN apt-get install -y --no-install-recommends git
+RUN apt-get install -y --no-install-recommends git openssh-client
+
+# Mount the data volume and assume control of data and keys
+VOLUME ["/home/ubuntu/data:/opt/data", "/home/ubuntu/data/.ssh:/root/.ssh"]
+RUN /opt/tools/setup-ssh.sh
 
 # Cleaning
 RUN apt-get clean
