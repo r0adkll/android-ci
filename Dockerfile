@@ -24,7 +24,7 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 COPY tools /opt/tools
 RUN chown root:root /opt/tools && chmod 777 /opt/tools && chmod 777 /opt/tools/android-accept-licenses.sh && chmod 777 /opt/tools/setup-ssh.sh
 ENV PATH ${PATH}:/opt/tools
-RUN ["/opt/tools/android-accept-licenses.sh", "android update sdk --no-ui --force --all --filter tools,platform-tools,build-tools-23.0.1,android-23,extra-google-m2repository,extra-google-google_play_services,extra-android-support,extra-android-m2repository"]
+RUN echo y | android update sdk --no-ui --force --all --filter tools,platform-tools,build-tools-23.0.1,android-23,extra-google-m2repository,extra-google-google_play_services,extra-android-support,extra-android-m2repository
 
 RUN which android
 
