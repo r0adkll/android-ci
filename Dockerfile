@@ -18,14 +18,20 @@ RUN cd /opt && wget --output-document=android-sdk.tgz --quiet http://dl.google.c
 
 # Setup environment
 ENV ANDROID_HOME /opt/android-sdk-linux
-ENV ANDROID_SDK /opt/android-sdk-linux
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 
 # Install Android SDK components
-ONBUILD RUN echo y | android update sdk --no-ui --force --all --filter tools,platform-tools,build-tools-23.0.1,android-23,extra-google-m2repository,extra-google-google_play_services,extra-android-support,extra-android-m2repository
+COPY tools /opt/tools
+ENV PATH ${PATH}:/opt/tools
+RUN ["/opt/tools/android-accept-licenses.sh", "android update sdk --no-ui --force --all --filter tools,platform-tools,build-tools-23.0.1,android-23,extra-google-m2repository,extra-google-google_play_services,extra-android-support,extra-android-m2repository"]
+
+RUN which android
 
 # Git to pull external repositories of Android app projects
 RUN apt-get install -y --no-install-recommends git
+
+# Cleaning
+RUN apt-get clean
 
 RUN mkdir -p /opt/workspace
 WORKDIR /opt/workspace
