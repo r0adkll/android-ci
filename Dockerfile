@@ -29,10 +29,6 @@ RUN echo y | android update sdk --no-ui --force --all --filter tools,platform-to
 # Git to pull external repositories of Android app projects
 RUN apt-get install -y --no-install-recommends git openssh-client
 
-# Mount the data volume and assume control of data and keys
-VOLUME /home/ubuntu/data/.ssh:/root/.ssh
-RUN /opt/tools/setup-ssh.sh
-
 # Cleaning
 RUN apt-get clean
 
